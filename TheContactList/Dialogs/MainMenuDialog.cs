@@ -104,10 +104,18 @@ public class MainMenuDialog
 
     public static void ShowContacts()
     {
-        var contacts = new Contact();
+        var contacts = _contactService.GetAllContacts();
         Console.Clear();
-        Console.WriteLine("----------- Contacts ----------");
-        Console.WriteLine($"{contacts.FullName}");
+        foreach (var contact in contacts) 
+        {
+            Console.WriteLine("----------- Contacts ----------");
+            Console.WriteLine($"{"Name:",-5}{contacts.FullName}");
+            Console.WriteLine($"{"Name:",-5}{contacts.FullAdress}");
+            Console.WriteLine($"{"Name:",-5}{contacts.City}");
+            Console.WriteLine($"{"Name:",-5}{contacts.Email}");
+            Console.WriteLine($"{"Name:",-5}{contacts.Phone}");
+            Console.WriteLine("");
+        }
         Console.ReadKey();
     }
 

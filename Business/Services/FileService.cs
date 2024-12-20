@@ -1,5 +1,6 @@
 ﻿using Business.Interfaces;
-using Business.Services;q
+using Business.Models;
+using Business.Services;
 using System.Diagnostics;
 
 namespace Business.Services;
@@ -8,7 +9,7 @@ public class FileService : IFileService
     private readonly string _directoryPath;
     private readonly string _filePath;
 
-    public FileService(string directoryPath = "Data", string filePath = "list.json")
+    public FileService(string directoryPath, string filePath)
     {
         _directoryPath = directoryPath;
         _filePath = Path.Combine(_directoryPath, filePath);
