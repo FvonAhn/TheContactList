@@ -4,5 +4,4 @@ namespace Business.Interfaces;
 public interface IContactService
 {
     bool CreateContact(ContactForm contactForm);
-    IEnumerable<Contact> GetAllContacts();
 }

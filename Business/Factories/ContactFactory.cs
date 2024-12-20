@@ -1,4 +1,5 @@
 ﻿using Business.Models;
+using Business.Helpers
 using System.Diagnostics;
 
 
@@ -16,7 +17,6 @@ public static class ContactFactory
         {
             return new ContactEntity
             {
-                Id = Guid.NewGuid().ToString(),
                 FirstName = form.FirstName,
                 LastName = form.LastName,
                 Adress = form.Adress,

@@ -1,6 +1,9 @@
-﻿using Business.Interfaces;
+﻿using Business.Factories;
+using Business.Helpers;
+using Business.Interfaces;
 using Business.Models;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace Business.Services;
 public class ContactService : IContactService
@@ -12,13 +15,18 @@ public class ContactService : IContactService
         _fileService = fileService;
     }
 
-    public bool CreateContact(ContactForm contactForm)
+    public bool CreateContact(ContactForm form)
     {
-        throw new NotImplementedException();
-    }
-
-    public IEnumerable<Contact> GetAllContacts() 
-    {
-        throw new NotImplementedException();
+        try
+        {
+            ContactEntity contactEntity = ContactFactory.Create(form)!;
+            contactEntity.Id = IdGenerator.GenerateID();
+            return true;
+        }
+        catch (Exception ex) 
+        {
+            Debug.WriteLine(ex.Message);
+            return false;
+        }
     }
 }

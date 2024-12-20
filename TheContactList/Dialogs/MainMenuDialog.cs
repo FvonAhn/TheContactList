@@ -1,10 +1,12 @@
-﻿using Business.Models;
+﻿using Business.Interfaces;
+using Business.Models;
 using System.Security.Cryptography;
 
 namespace TheContactList.Dialogs;
 public class MainMenuDialog
 {
-    public static void MainMenu()
+
+    public void MainMenu()
     {
         Console.WriteLine("Welcome!");
         Console.ReadKey();
@@ -53,26 +55,26 @@ public class MainMenuDialog
 
     public static void NewContact()
     {
-        bool isTrue = true;
-        while (isTrue) 
+
+        while (true) 
         {
             var contact = new ContactForm();
             Console.Clear();
-            Console.Write("First Name: ");
+            Console.Write("Enter your first name: ");
             contact.FirstName = Console.ReadLine()!;
-            Console.Write("Last Name: ");
+            Console.Write("Enter your last name: ");
             contact.LastName = Console.ReadLine()!;
-            Console.Write("Adress: ");
+            Console.Write("Enter your adress: ");
             contact.Adress = Console.ReadLine()!;
-            Console.Write("Postal Code: ");
+            Console.Write("Enter the postal code: ");
             contact.PostalCode = Console.ReadLine()!;
-            Console.Write("City: ");
+            Console.Write("Enter what city: ");
             contact.City = Console.ReadLine()!;
-            Console.Write("Email: ");
+            Console.Write("Enter your email: ");
             contact.Email = Console.ReadLine()!;
-            Console.Write("Phone: ");
+            Console.Write("Enter your phonenumber: ");
             contact.Phone = Console.ReadLine()!;
-            isTrue = false;
+            Environment.Exit(0);
         }
     }
 
