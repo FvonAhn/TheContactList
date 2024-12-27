@@ -1,7 +1,9 @@
-﻿namespace Business.Interfaces;
+﻿using Business.Models;
+
+namespace Business.Interfaces;
 
 public interface IFileService
 {
-    bool SaveContactToFile(string content);
-    string GetContactFromFile();
+    bool SaveContactsToFile(List<ContactEntity> contact);
+    string GetContactsFromFile();
 }

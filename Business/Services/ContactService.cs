@@ -8,12 +8,12 @@ using System.Diagnostics;
 namespace Business.Services;
 public class ContactService : IContactService
 {
-   /* private readonly FileService _fileService;
+    private readonly FileService _fileService;
 
     public ContactService(FileService fileService) 
     {
         _fileService = fileService;
-    } */
+    }
 
     public readonly List<ContactEntity> _contacts = [];
 
@@ -25,6 +25,7 @@ public class ContactService : IContactService
             contactEntity.Id = IdGenerator.GenerateID();
             
             _contacts.Add(contactEntity);
+            _fileService.SaveContactsToFile(_contacts);
             return true;
         }
         catch (Exception ex) 
@@ -34,8 +35,9 @@ public class ContactService : IContactService
         }
     }
 
-    public IEnumerable<Contact> GetContacts() 
+    public List<ContactEntity> GetContacts() 
     {
-        return _contacts.Select(ContactFactory.Create);
+        _contacts = _fileService.GetContactsFromFile();
+        return _contacts;
     }
 }
