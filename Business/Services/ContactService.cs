@@ -8,6 +8,7 @@ using System.Diagnostics;
 namespace Business.Services;
 public class ContactService : IContactService
 {
+    public List<ContactEntity> _contacts = [];
     private readonly FileService _fileService;
 
     public ContactService(FileService fileService) 
@@ -15,7 +16,9 @@ public class ContactService : IContactService
         _fileService = fileService;
     }
 
-    public readonly List<ContactEntity> _contacts = [];
+    public ContactService()
+    {
+    }
 
     public bool CreateContact(ContactForm form)
     {
@@ -35,7 +38,7 @@ public class ContactService : IContactService
         }
     }
 
-    public List<ContactEntity> GetContacts() 
+    public IEnumerable<ContactEntity> GetContacts() 
     {
         _contacts = _fileService.GetContactFromFile();
         return _contacts;

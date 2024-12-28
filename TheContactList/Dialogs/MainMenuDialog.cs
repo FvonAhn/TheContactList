@@ -1,10 +1,12 @@
 ﻿using Business.Interfaces;
 using Business.Models;
+using Business.Services;
 using System.Security.Cryptography;
 
 namespace TheContactList.Dialogs;
 public class MainMenuDialog
 {
+    private readonly ContactService _contactService = new();
 
     public void MainMenu()
     {
@@ -53,11 +55,9 @@ public class MainMenuDialog
         }
     }
 
-    public static void NewContact()
+    public void NewContact()
     {
 
-        while (true) 
-        {
             var contact = new ContactForm();
             Console.Clear();
             Console.Write("Enter your first name: ");
@@ -74,8 +74,8 @@ public class MainMenuDialog
             contact.Email = Console.ReadLine()!;
             Console.Write("Enter your phonenumber: ");
             contact.Phone = Console.ReadLine()!;
-            Environment.Exit(0);
-        }
+
+            _contactService.Add(contact);
     }
 
     public static void UpdateContact()
@@ -102,18 +102,19 @@ public class MainMenuDialog
         }
     }
 
-    public static void ShowContacts()
+    public void ShowContacts()
     {
-        var contacts = _contactService.GetAllContacts();
+
         Console.Clear();
-        foreach (var contact in contacts) 
+        foreach (var contacts in _contactService.GetContacts()) 
         {
-            Console.WriteLine("----------- Contacts ----------");
+            Console.WriteLine("----------- Contact ----------");
             Console.WriteLine($"{"Name:",-5}{contacts.FullName}");
             Console.WriteLine($"{"Name:",-5}{contacts.FullAdress}");
             Console.WriteLine($"{"Name:",-5}{contacts.City}");
             Console.WriteLine($"{"Name:",-5}{contacts.Email}");
             Console.WriteLine($"{"Name:",-5}{contacts.Phone}");
+            Console.WriteLine("------------------------------");
             Console.WriteLine("");
         }
         Console.ReadKey();
@@ -131,7 +132,6 @@ public class MainMenuDialog
             Console.Clear();
             Console.WriteLine("Goodbye!");
             Console.ReadKey();
-            Console.Clear();
             Environment.Exit(0);
         }
     }
