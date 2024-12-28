@@ -25,7 +25,7 @@ public class ContactService : IContactService
             contactEntity.Id = IdGenerator.GenerateID();
             
             _contacts.Add(contactEntity);
-            _fileService.SaveContactsToFile(_contacts);
+            _fileService.SaveContactToFile(_contacts);
             return true;
         }
         catch (Exception ex) 
@@ -37,7 +37,7 @@ public class ContactService : IContactService
 
     public List<ContactEntity> GetContacts() 
     {
-        _contacts = _fileService.GetContactsFromFile();
+        _contacts = _fileService.GetContactFromFile();
         return _contacts;
     }
 }
